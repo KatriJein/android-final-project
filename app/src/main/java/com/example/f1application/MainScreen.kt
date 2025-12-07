@@ -13,6 +13,7 @@ import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDe
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
+import com.example.f1application.core.navigation.DriverDetails
 import com.example.f1application.core.navigation.Drivers
 import com.example.f1application.core.navigation.Home
 import com.example.f1application.core.navigation.Profile
@@ -20,11 +21,12 @@ import com.example.f1application.core.navigation.RaceDetails
 import com.example.f1application.core.navigation.Races
 import com.example.f1application.core.navigation.Route
 import com.example.f1application.core.navigation.TopLevelBackStack
+import com.example.f1application.features.drivers.view.DriverDetailScreen
+import com.example.f1application.features.drivers.view.DriversListScreen
 import com.example.f1application.features.home.view.HomeScreen
 import com.example.f1application.features.races.view.RacesListScreen
 import com.example.f1application.shared.ui.RaceDetailScreen
 import org.koin.java.KoinJavaComponent.inject
-
 
 @Composable
 fun MainScreen() {
@@ -65,7 +67,7 @@ fun MainScreen() {
                     RacesListScreen()
                 }
                 entry<Drivers> {
-//                    DriversListView()
+                    DriversListScreen()
                 }
                 entry<Profile> {
 //                    ProfileView()
@@ -73,6 +75,9 @@ fun MainScreen() {
 
                 entry<RaceDetails> { route ->
                     RaceDetailScreen(race = route.race)
+                }
+                entry<DriverDetails> { route ->
+                    DriverDetailScreen(driverId = route.driverId)
                 }
 //                entry<EditProfile> {
 //                    EditProfileScreen(
@@ -91,12 +96,3 @@ fun MainScreen() {
         )
     }
 }
-
-
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    PracticesAndroidTheme {
-//        MainScreen()
-//    }
-//}

@@ -5,6 +5,6 @@ import com.example.f1application.core.model.Race
 
 interface Route
 
-data class DriverDetails(val driver: Driver) : Route
+data class DriverDetails(val driverId: String) : Route
 data class RaceDetails(val race: Race) : Route
 data object EditProfile : Route

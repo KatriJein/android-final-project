@@ -10,5 +10,6 @@ data class Driver(
     val country: String,
     val imageUrl: String? = null,
     val points: Int? = null,
-    val wins: Int? = null
+    val position: Int? = null,
+    val wins: Int? = null,
 )

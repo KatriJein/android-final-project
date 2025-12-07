@@ -13,19 +13,15 @@ data class ApiSingleRaceResponse(
     val race: List<ApiRace>
 )
 
-//@Serializable
-//data class ApiDriversResponse(
-//    val drivers: List<ApiDriver>
-//)
-
-// --- ApiRace ---
 @Serializable
 data class ApiRace(
     val raceId: String,
     val round: Int,
-    val laps: Int,
-    val raceName: String,
-    val schedule: ApiSchedule,
+    val laps: Int?,
+    val date: String?,
+    val raceName: String?,
+    val name: String?,
+    val schedule: ApiSchedule?,
     val circuit: ApiCircuit,
     val winner: ApiDriver?,
     val teamWinner: ApiTeam?,
@@ -41,40 +37,103 @@ data class ApiSession(val date: String, val time: String?)
 @Serializable
 data class ApiCircuit(
     val circuitId: String,
-    val circuitName: String,
+    val circuitName: String?,
+    val name: String?,
     val country: String,
     val city: String,
-    @SerialName("circuitLength") val lengthStr: String,
-    val corners: Int
+    @SerialName("circuitLength") val lengthStr: String?,
+    val length: Int?,
+    val corners: Int?,
+    val numberOfCorners: Int?
 )
 
-// --- ApiDriver ---
 @Serializable
 data class ApiDriver(
-    val driverId: String,
+    val driverId: String?,
     val name: String,
     val surname: String,
     val shortName: String?,
     val number: Int?,
-    val country: String,
+    val nationality: String?,
+    val country: String?,
     val birthday: String
-//    val image: String?,
-//    val points: String? // строка из API!
 )
 
-// --- ApiTeam ---
 @Serializable
 data class ApiTeam(
-    val teamId: String,
+    val teamId: String?,
     val teamName: String,
-    val country: String,
-    val firstAppearance: Int
+    val country: String?,
+    val teamNationality: String?
 )
 
-// --- ApiFastLap ---
 @Serializable
 data class ApiFastLap(
     @SerialName("fast_lap") val time: String?,
     @SerialName("fast_lap_driver_id") val driverId: String?,
     @SerialName("fast_lap_team_id") val teamId: String?
+)
+
+// Driver Details
+@Serializable
+data class ApiDriverDetailsResponse(
+    val driver: ApiDriver,
+    val team: ApiTeam,
+    val results: List<ApiDriverResult>
+)
+
+@Serializable
+data class ApiDriverResult(
+    val race: ApiRace,
+    val result: ApiRaceResult,
+    val sprintResult: ApiSprintResult?
+)
+
+@Serializable
+data class ApiRaceResult(
+    val finishingPosition: String,
+    val gridPosition: Int,
+    val raceTime: String,
+    val pointsObtained: Int,
+    val retired: String?
+)
+
+@Serializable
+data class ApiSprintResult(
+    val finishingPosition: Int?,
+    val gridPosition: Int,
+    val raceTime: String,
+    val pointsObtained: Int,
+    val retired: String?
+)
+
+// Drivers Championship
+@Serializable
+data class ApiDriversChampionshipResponse(
+    @SerialName("drivers_championship") val driversChampionship: List<ApiDriverStanding>
+)
+
+@Serializable
+data class ApiDriverStanding(
+    val position: Int,
+    val points: Int,
+    val wins: Int,
+    val driverId: String,
+    val driver: ApiDriver,
+    val team: ApiTeam
+)
+
+// Constructors Championship
+@Serializable
+data class ApiConstructorsChampionshipResponse(
+    @SerialName("constructors_championship") val constructorsChampionship: List<ApiConstructorStanding>
+)
+
+@Serializable
+data class ApiConstructorStanding(
+    val position: Int,
+    val points: Int,
+    val wins: Int,
+    val teamId: String,
+    val team: ApiTeam
 )

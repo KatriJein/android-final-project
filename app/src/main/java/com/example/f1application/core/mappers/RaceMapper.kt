@@ -1,8 +1,27 @@
 package com.example.f1application.core.mappers
 
 import androidx.compose.ui.graphics.Color
-import com.example.f1application.core.api.*
-import com.example.f1application.core.model.*
+import com.example.f1application.core.api.ApiCircuit
+import com.example.f1application.core.api.ApiConstructorStanding
+import com.example.f1application.core.api.ApiDriver
+import com.example.f1application.core.api.ApiDriverResult
+import com.example.f1application.core.api.ApiDriverStanding
+import com.example.f1application.core.api.ApiFastLap
+import com.example.f1application.core.api.ApiRace
+import com.example.f1application.core.api.ApiRaceResult
+import com.example.f1application.core.api.ApiSprintResult
+import com.example.f1application.core.api.ApiTeam
+import com.example.f1application.core.model.Circuit
+import com.example.f1application.core.model.ConstructorStanding
+import com.example.f1application.core.model.Driver
+import com.example.f1application.core.model.DriverResult
+import com.example.f1application.core.model.DriverStanding
+import com.example.f1application.core.model.FastLapInfo
+import com.example.f1application.core.model.Race
+import com.example.f1application.core.model.RaceResult
+import com.example.f1application.core.model.RaceStatus
+import com.example.f1application.core.model.SprintResult
+import com.example.f1application.core.model.Team
 import com.example.f1application.shared.TeamAssets
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -31,8 +50,8 @@ fun ApiRace.toDomain(): Race {
     return Race(
         id = raceId,
         round = round,
-        name = raceName,
-        date = formatDateToDdMmYyyy(schedule.race.date),
+        name = raceName ?: name ?: "",
+        date = formatDateToDdMmYyyy(schedule.race.date) ?: date ?: "",
         dateString = formattedDate,
         circuit = circuit.toDomain(),
         winner = winner?.toDomain(),
@@ -67,31 +86,37 @@ private fun formatDateToDdMmYyyy(dateString: String): String {
 }
 
 fun ApiCircuit.toDomain(): Circuit {
-    val lengthKm = lengthStr
-        .replace("km", "")
-        .toFloatOrNull()?.div(1000f) ?: 5.0f
+    val lengthKm = if (lengthStr != null) {
+        lengthStr
+            .replace("km", "")
+            .toFloatOrNull()
+            ?.div(1000f)
+    } else {
+        length?.toFloat()
+    } ?: 5.0f
 
     return Circuit(
         id = circuitId,
-        name = circuitName,
+        name = circuitName ?: name ?: "",
         country = country,
         city = city,
         lengthKm = lengthKm,
-        corners = corners,
+        corners = corners ?: numberOfCorners ?: 0,
         imageUrl = TeamAssets.getCircuitImage(circuitId)
     )
 }
 
 fun ApiDriver.toDomain(): Driver {
     return Driver(
-        id = driverId,
+        id = driverId ?: "",
         firstName = name,
         lastName = surname,
         shortName = shortName,
         number = number,
-        country = country,
-        imageUrl = TeamAssets.getDriverPhoto(driverId),
+        country = nationality ?: country ?: "Неизвестно",
+        imageUrl = TeamAssets.getDriverPhoto(driverId ?: ""),
         points = null,
+        position = null,
         wins = null,
         birthday = birthday
     )
@@ -99,12 +124,14 @@ fun ApiDriver.toDomain(): Driver {
 
 fun ApiTeam.toDomain(): Team {
     return Team(
-        id = teamId,
+        id = teamId ?: "",
         name = teamName,
-        country = country,
+        country = country ?: teamNationality ?: "Неизвестно",
         points = null,
-        imageUrl = TeamAssets.getTeamLogo(teamId),
-        color = Color(TeamAssets.getTeamColor(teamId))
+        position = null,
+        wins = null,
+        imageUrl = TeamAssets.getTeamLogo(teamId ?: ""),
+        color = Color(TeamAssets.getTeamColor(teamId ?: ""))
     )
 }
 
@@ -113,5 +140,81 @@ fun ApiFastLap.toDomain(): FastLapInfo {
         time = time,
         driverId = driverId,
         teamId = teamId
+    )
+}
+
+fun ApiDriverStanding.toDomain(): DriverStanding {
+    return DriverStanding(
+        position = position,
+        points = points,
+        wins = wins,
+        driver = driver.toDomain(driverId = driverId, nationality = driver.nationality),
+        team = team.toDomain()
+    )
+}
+
+fun ApiDriver.toDomain(driverId: String, nationality: String?): Driver {
+    return Driver(
+        id = driverId,
+        firstName = name,
+        lastName = surname,
+        shortName = shortName,
+        number = number,
+        country = nationality ?: "Неизвестно",
+        imageUrl = TeamAssets.getDriverPhoto(driverId),
+        points = null,
+        position = null,
+        wins = null,
+        birthday = birthday
+    )
+}
+
+fun ApiConstructorStanding.toDomain(): ConstructorStanding {
+    return ConstructorStanding(
+        position = position,
+        points = points,
+        wins = wins,
+        team = team.toDomain(teamId = teamId)
+    )
+}
+
+fun ApiTeam.toDomain(teamId: String): Team {
+    return Team(
+        id = teamId,
+        name = teamName,
+        country = country ?: teamNationality ?: "Неизвестно",
+        points = null,
+        position = null,
+        wins = null,
+        imageUrl = TeamAssets.getTeamLogo(teamId),
+        color = Color(TeamAssets.getTeamColor(teamId))
+    )
+}
+
+fun ApiDriverResult.toDomain(): DriverResult {
+    return DriverResult(
+        race = race.toDomain(),
+        result = result.toDomain(),
+        sprintResult = sprintResult?.toDomain()
+    )
+}
+
+fun ApiRaceResult.toDomain(): RaceResult {
+    return RaceResult(
+        finishingPosition = finishingPosition,
+        gridPosition = gridPosition,
+        raceTime = raceTime,
+        pointsObtained = pointsObtained,
+        retired = retired
+    )
+}
+
+fun ApiSprintResult.toDomain(): SprintResult {
+    return SprintResult(
+        finishingPosition = finishingPosition,
+        gridPosition = gridPosition,
+        raceTime = raceTime,
+        pointsObtained = pointsObtained,
+        retired = retired
     )
 }

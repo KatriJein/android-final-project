@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.f1application.di.dbModule
 import com.example.f1application.di.mainModule
 import com.example.f1application.di.networkModule
+import com.example.f1application.features.drivers.di.driversFeatureModule
 import com.example.f1application.features.home.di.homeFeatureModule
 import com.example.f1application.features.races.di.racesFeatureModule
 import org.koin.android.ext.koin.androidContext
@@ -16,7 +17,14 @@ class App : Application() {
         startKoin {
             androidLogger()
             androidContext(this@App)
-            modules(mainModule, networkModule, dbModule, homeFeatureModule, racesFeatureModule)
+            modules(
+                mainModule,
+                networkModule,
+                dbModule,
+                homeFeatureModule,
+                racesFeatureModule,
+                driversFeatureModule
+            )
         }
     }
 }

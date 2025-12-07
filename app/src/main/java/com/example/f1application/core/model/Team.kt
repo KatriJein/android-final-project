@@ -8,5 +8,7 @@ data class Team(
     val country: String,
     val imageUrl: String? = null,
     val points: Int? = null,
+    val position: Int? = null,
+    val wins: Int? = null,
     val color: Color
 )

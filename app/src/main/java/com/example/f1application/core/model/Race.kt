@@ -3,7 +3,7 @@ package com.example.f1application.core.model
 data class Race(
     val id: String,
     val round: Int,
-    val laps: Int,
+    val laps: Int?,
     val name: String,
     val date: String,
     val dateString: String,
