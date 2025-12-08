@@ -18,6 +18,10 @@ class DriverDetailViewModel(
     private val _uiState = MutableStateFlow<DriverDetailUiState>(DriverDetailUiState.Loading)
     val uiState: StateFlow<DriverDetailUiState> = _uiState.asStateFlow()
 
+    fun retry(driverId: String) {
+        loadDriverDetails(driverId)
+    }
+
     fun loadDriverDetails(driverId: String) {
         viewModelScope.launch {
             _uiState.value = DriverDetailUiState.Loading
@@ -39,5 +43,6 @@ sealed class DriverDetailUiState {
         val driverStanding: DriverStanding,
         val results: List<DriverResult>
     ) : DriverDetailUiState()
+
     data class Error(val message: String) : DriverDetailUiState()
 }

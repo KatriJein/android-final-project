@@ -2,15 +2,11 @@ package com.example.f1application.core.api
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import com.example.f1application.shared.FinishingPositionSerializer
 
 @Serializable
 data class ApiRacesResponse(
     val races: List<ApiRace>
-)
-
-@Serializable
-data class ApiSingleRaceResponse(
-    val race: List<ApiRace>
 )
 
 @Serializable
@@ -91,8 +87,10 @@ data class ApiDriverResult(
 
 @Serializable
 data class ApiRaceResult(
+    @Serializable(with = FinishingPositionSerializer::class)
     val finishingPosition: String,
-    val gridPosition: Int,
+    @Serializable(with = FinishingPositionSerializer::class)
+    val gridPosition: String,
     val raceTime: String,
     val pointsObtained: Int,
     val retired: String?
@@ -100,9 +98,10 @@ data class ApiRaceResult(
 
 @Serializable
 data class ApiSprintResult(
-    val finishingPosition: Int?,
+    @Serializable(with = FinishingPositionSerializer::class)
+    val finishingPosition: String?,
     val gridPosition: Int,
-    val raceTime: String,
+    val raceTime: String?,
     val pointsObtained: Int,
     val retired: String?
 )

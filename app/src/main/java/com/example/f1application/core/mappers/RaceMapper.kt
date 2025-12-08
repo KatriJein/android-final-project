@@ -27,8 +27,14 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 fun ApiRace.toDomain(): Race {
+    val raceDateString = schedule?.race?.date ?: date
+
     val raceDate = try {
-        LocalDate.parse(schedule.race.date, DateTimeFormatter.ISO_LOCAL_DATE)
+        if (raceDateString != null) {
+            LocalDate.parse(raceDateString, DateTimeFormatter.ISO_LOCAL_DATE)
+        } else {
+            LocalDate.MAX
+        }
     } catch (e: Exception) {
         LocalDate.MAX
     }
@@ -42,17 +48,27 @@ fun ApiRace.toDomain(): Race {
         else -> RaceStatus.IN_PROGRESS
     }
 
-    val formattedDate = formatRaceDate(
-        fp1Date = schedule.fp1.date,
-        raceDate = schedule.race.date
-    )
+    val formattedDate = if (raceDateString != null) {
+        formatDateToDdMmYyyy(raceDateString)
+    } else {
+        "Дата не указана"
+    }
+
+    val dateString = if (schedule != null) {
+        formatRaceDate(
+            fp1Date = schedule.fp1.date,
+            raceDate = schedule.race.date
+        )
+    } else {
+        formattedDate
+    }
 
     return Race(
         id = raceId,
         round = round,
         name = raceName ?: name ?: "",
-        date = formatDateToDdMmYyyy(schedule.race.date) ?: date ?: "",
-        dateString = formattedDate,
+        date = formattedDate,
+        dateString = dateString,
         circuit = circuit.toDomain(),
         winner = winner?.toDomain(),
         teamWinner = teamWinner?.toDomain(),

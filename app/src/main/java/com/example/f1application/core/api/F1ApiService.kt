@@ -4,9 +4,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface F1ApiService {
-    @GET("current/next")
-    suspend fun getNextRace(): ApiSingleRaceResponse
-
     @GET("current")
     suspend fun getAllRaces(): ApiRacesResponse
 

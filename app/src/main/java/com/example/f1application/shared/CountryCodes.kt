@@ -18,7 +18,17 @@ object CountryCodes {
         "Brazil" to "BR",
         "Japan" to "JP",
         "Switzerland" to "CH",
-        "Austria" to "AT"
+        "Austria" to "AT",
+        "China" to "CN",
+        "Bahrain" to "BH",
+        "Saudi Arabia" to "SA",
+        "Belgium" to "BE",
+        "Hungary" to "HU",
+        "United Arab Emirates" to "AE",
+        "Qatar" to "QA",
+        "Mexico" to "MX",
+        "Singapore" to "SG",
+        "Azerbaijan" to "AZ",
     )
 
     fun getCode(countryName: String): String? = countryMap[countryName]

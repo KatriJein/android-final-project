@@ -9,11 +9,6 @@ import com.example.f1application.core.model.Race
 class HomeRepository(
     private val apiService: F1ApiService
 ) {
-    suspend fun getNextRace(): Race {
-        val response = apiService.getNextRace()
-        return response.race.first().toDomain()
-    }
-
     suspend fun getTopDrivers(count: Int): List<DriverStanding> {
         val response = apiService.getDriversChampionship()
         return response.driversChampionship

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.f1application.core.model.ConstructorStanding
 import com.example.f1application.core.model.DriverStanding
 import com.example.f1application.core.model.Race
+import com.example.f1application.core.navigation.DriverDetails
 import com.example.f1application.core.navigation.RaceDetails
 import com.example.f1application.core.navigation.Route
 import com.example.f1application.core.navigation.TopLevelBackStack
@@ -26,18 +27,21 @@ class HomeViewModel(
         loadHomeData()
     }
 
-    fun onRaceClick(race: Race) {
-        topLevelBackStack.add(RaceDetails(race))
+    fun retry() {
+        loadHomeData()
+    }
+
+    fun onDriverClick(driverId: String) {
+        topLevelBackStack.add(DriverDetails(driverId))
     }
 
     private fun loadHomeData() {
         viewModelScope.launch {
             _uiState.value = HomeUiState.Loading
             try {
-                val nextRace = repository.getNextRace()
                 val topDrivers = repository.getTopDrivers(3)
                 val topTeams = repository.getTopTeams(3)
-                _uiState.value = HomeUiState.Success(nextRace, topDrivers, topTeams)
+                _uiState.value = HomeUiState.Success(topDrivers, topTeams)
             } catch (e: Exception) {
                 _uiState.value = HomeUiState.Error(e.message ?: "Неизвестная ошибка")
             }
@@ -48,9 +52,9 @@ class HomeViewModel(
 sealed class HomeUiState {
     object Loading : HomeUiState()
     data class Success(
-        val nextRace: Race,
         val topDrivers: List<DriverStanding>,
         val topTeams: List<ConstructorStanding>
     ) : HomeUiState()
+
     data class Error(val message: String) : HomeUiState()
 }

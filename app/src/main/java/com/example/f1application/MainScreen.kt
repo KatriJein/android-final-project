@@ -35,19 +35,13 @@ fun MainScreen() {
     Scaffold(bottomBar = {
         NavigationBar {
             listOf(Home, Races, Drivers, Profile).forEach { route ->
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            route.icon,
-                            contentDescription = null,
-                            modifier = Modifier.size(38.dp)
-                        )
-                    },
-                    selected = topLevelBackStack.topLevelKey == route,
-                    onClick = {
-                        topLevelBackStack.addTopLevel(route)
-                    }
-                )
+                NavigationBarItem(icon = {
+                    Icon(
+                        route.icon, contentDescription = null, modifier = Modifier.size(38.dp)
+                    )
+                }, selected = topLevelBackStack.topLevelKey == route, onClick = {
+                    topLevelBackStack.addTopLevel(route)
+                })
             }
         }
     }) { padding ->
@@ -56,8 +50,7 @@ fun MainScreen() {
             onBack = { topLevelBackStack.removeLast() },
             modifier = Modifier.padding(padding),
             entryDecorators = listOf(
-                rememberSavedStateNavEntryDecorator(),
-                rememberViewModelStoreNavEntryDecorator()
+                rememberSavedStateNavEntryDecorator(), rememberViewModelStoreNavEntryDecorator()
             ),
             entryProvider = entryProvider {
                 entry<Home> {
@@ -84,15 +77,6 @@ fun MainScreen() {
 //                        onBackClick = { topLevelBackStack.removeLast() }
 //                    )
 //                }
-//                entry<DriverDetails> { route ->
-//                    DriversDetailsView(
-//                        driverId = route.driverId,
-//                        initialPoints = route.initialPoints,
-//                        initialPosition = route.initialPosition,
-//                        initialWins = route.initialWins
-//                    )
-//                }
-            }
-        )
+            })
     }
 }

@@ -1,11 +1,26 @@
 package com.example.f1application.features.drivers.view
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -19,6 +34,8 @@ import com.example.f1application.core.model.DriverResult
 import com.example.f1application.core.model.DriverStanding
 import com.example.f1application.features.drivers.viewModel.DriverDetailUiState
 import com.example.f1application.features.drivers.viewModel.DriverDetailViewModel
+import com.example.f1application.shared.ui.FullscreenError
+import com.example.f1application.shared.ui.FullscreenLoading
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalGlideComposeApi::class)
@@ -34,21 +51,13 @@ fun DriverDetailScreen(driverId: String) {
     val state = uiState
     when (state) {
         is DriverDetailUiState.Loading -> {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator()
-            }
+            FullscreenLoading()
         }
+
         is DriverDetailUiState.Error -> {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Text("Ошибка: ${state.message}")
-            }
+            FullscreenError(retry = { viewModel.retry(driverId) }, state.message)
         }
+
         is DriverDetailUiState.Success -> {
             DriverDetailContent(standing = state.driverStanding, results = state.results)
         }
@@ -63,7 +72,6 @@ fun DriverDetailContent(standing: DriverStanding, results: List<DriverResult>) {
         verticalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(16.dp)
     ) {
-        // --- Основная информация ---
         item {
             Card(
                 modifier = Modifier.fillMaxWidth(),

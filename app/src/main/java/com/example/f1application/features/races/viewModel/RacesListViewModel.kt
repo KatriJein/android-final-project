@@ -1,8 +1,5 @@
 package com.example.f1application.features.races.viewModel
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.f1application.core.model.Race
@@ -31,6 +28,10 @@ class RacesListViewModel(
     val isAscending: StateFlow<Boolean> = _isAscending.asStateFlow()
 
     init {
+        loadRaces()
+    }
+
+    fun retry() {
         loadRaces()
     }
 

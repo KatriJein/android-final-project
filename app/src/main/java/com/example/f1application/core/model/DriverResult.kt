@@ -8,16 +8,16 @@ data class DriverResult(
 
 data class RaceResult(
     val finishingPosition: String,
-    val gridPosition: Int,
+    val gridPosition: String,
     val raceTime: String,
     val pointsObtained: Int,
     val retired: String?
 )
 
 data class SprintResult(
-    val finishingPosition: Int?,
+    val finishingPosition: String?,
     val gridPosition: Int,
-    val raceTime: String,
+    val raceTime: String?,
     val pointsObtained: Int,
     val retired: String?
 )
