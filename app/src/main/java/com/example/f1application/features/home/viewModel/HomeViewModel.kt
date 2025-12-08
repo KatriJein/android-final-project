@@ -4,9 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.f1application.core.model.ConstructorStanding
 import com.example.f1application.core.model.DriverStanding
-import com.example.f1application.core.model.Race
 import com.example.f1application.core.navigation.DriverDetails
-import com.example.f1application.core.navigation.RaceDetails
 import com.example.f1application.core.navigation.Route
 import com.example.f1application.core.navigation.TopLevelBackStack
 import com.example.f1application.features.home.repository.HomeRepository

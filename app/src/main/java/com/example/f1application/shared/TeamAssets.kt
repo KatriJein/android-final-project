@@ -80,7 +80,7 @@ object TeamAssets {
         "yas_marina" to "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Yas_Marina_Circuit.png/330px-Yas_Marina_Circuit.png"
     )
 
-    fun getTeamColor(id: String): Long = (teamColors[id.lowercase()] ?: 0xCCCCCC).toLong()
+    fun getTeamColor(id: String): Long = (teamColors[id.lowercase()] ?: 0xCCCCCC)
     fun getTeamLogo(id: String): String = teamLogos[id.lowercase()] ?: ""
     fun getDriverPhoto(id: String): String = driverPhotos[id.lowercase()] ?: driverPhotos["default"] ?: ""
     fun getCircuitImage(id: String): String = circuitImages[id.lowercase()] ?: ""

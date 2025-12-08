@@ -101,6 +101,17 @@ private fun formatDateToDdMmYyyy(dateString: String): String {
     }
 }
 
+private fun formatDateFromSlashToDot(dateString: String): String {
+    return try {
+        val inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        val outputFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        val localDate = LocalDate.parse(dateString, inputFormatter)
+        localDate.format(outputFormatter)
+    } catch (e: Exception) {
+        dateString
+    }
+}
+
 fun ApiCircuit.toDomain(): Circuit {
     val lengthKm = if (lengthStr != null) {
         lengthStr
@@ -134,7 +145,7 @@ fun ApiDriver.toDomain(): Driver {
         points = null,
         position = null,
         wins = null,
-        birthday = birthday
+        birthday = formatDateFromSlashToDot(birthday)
     )
 }
 
@@ -181,7 +192,7 @@ fun ApiDriver.toDomain(driverId: String, nationality: String?): Driver {
         points = null,
         position = null,
         wins = null,
-        birthday = birthday
+        birthday = formatDateFromSlashToDot(birthday)
     )
 }
 

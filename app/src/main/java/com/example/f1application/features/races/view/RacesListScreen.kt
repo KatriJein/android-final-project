@@ -21,17 +21,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Directions
 import androidx.compose.material.icons.filled.Place
-import androidx.compose.material.icons.filled.Sort
 import androidx.compose.material.icons.filled.Timeline
 import androidx.compose.material.icons.outlined.TurnRight
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -52,11 +47,11 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.example.f1application.core.model.Race
 import com.example.f1application.features.races.viewModel.RacesListUiState
 import com.example.f1application.features.races.viewModel.RacesListViewModel
+import com.example.f1application.shared.ui.CustomHeader
 import com.example.f1application.shared.ui.FullscreenError
 import com.example.f1application.shared.ui.FullscreenLoading
 import org.koin.androidx.compose.koinViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RacesListScreen() {
     val viewModel = koinViewModel<RacesListViewModel>()
@@ -69,25 +64,13 @@ fun RacesListScreen() {
         lazyListState.animateScrollToItem(0)
     }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(title = {
-                Text(
-                    text = "Гонки 2025",
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.SemiBold
-                )
-            }, actions = {
-                IconButton(onClick = {
-                    viewModel.toggleSortOrder()
-                }) {
-                    Icon(
-                        imageVector = Icons.Default.Sort,
-                        contentDescription = if (isAscending) "Сортировка: по возрастанию" else "Сортировка: по убыванию"
-                    )
-                }
-            })
-        }) { padding ->
+    Column(modifier = Modifier.fillMaxSize()) {
+        CustomHeader(
+            title = "Гонки 2025",
+            sortAction = { viewModel.toggleSortOrder() },
+            isAscending = isAscending
+        )
+
         val state = uiState
         when (state) {
             is RacesListUiState.Loading -> {
@@ -95,15 +78,17 @@ fun RacesListScreen() {
             }
 
             is RacesListUiState.Error -> {
-                FullscreenError(retry = { viewModel.retry() }, state.message)
+                FullscreenError(
+                    retry = { viewModel.retry() },
+                    text = state.message
+                )
             }
 
             is RacesListUiState.Success -> {
                 LazyColumn(
                     state = lazyListState,
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding),
+                        .fillMaxSize(),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     items(state.races) { race ->

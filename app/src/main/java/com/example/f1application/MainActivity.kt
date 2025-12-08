@@ -13,7 +13,10 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         enableEdgeToEdge()
         setContent {
-            AppTheme {
+            AppTheme(
+                darkTheme = false,
+                dynamicColor = false
+            ) {
                 MainScreen()
             }
         }

@@ -150,13 +150,14 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                         Icon(
                             imageVector = Icons.Default.Info,
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = MaterialTheme.colorScheme.tertiary,
+
                         )
                         Text(
                             text = "Информация о гонке",
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary
+                            color = MaterialTheme.colorScheme.tertiary
                         )
                     }
 
@@ -184,7 +185,7 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                                 RaceStatus.IN_PROGRESS -> Color(0xFFFF9800) // Оранжевый
                                 RaceStatus.FINISHED -> Color(0xFFF44336) // Красный
                             },
-                            modifier = Modifier.size(12.dp)
+                            modifier = Modifier.size(20.dp)
                         )
 
                         Spacer(modifier = Modifier.width(12.dp))
@@ -236,13 +237,13 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                         Icon(
                             imageVector = Icons.Default.Place,
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = MaterialTheme.colorScheme.tertiary
                         )
                         Text(
                             text = "Трасса",
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary
+                            color = MaterialTheme.colorScheme.tertiary
                         )
                     }
 
@@ -265,7 +266,7 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                         if (flagUrl != null) {
                             Surface(
                                 shape = RoundedCornerShape(8.dp),
-                                color = MaterialTheme.colorScheme.surfaceVariant,
+                                color = Color.Transparent,
                                 modifier = Modifier.size(32.dp)
                             ) {
                                 GlideImage(
@@ -297,13 +298,13 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                         InfoBadge(
                             icon = Icons.Default.Timeline,
                             text = "${race.circuit.lengthKm} км",
-                            color = MaterialTheme.colorScheme.primary
+                            color = MaterialTheme.colorScheme.tertiary
                         )
 
                         InfoBadge(
                             icon = Icons.Default.TurnRight,
                             text = "${race.circuit.corners} поворотов",
-                            color = MaterialTheme.colorScheme.secondary
+                            color = MaterialTheme.colorScheme.tertiary
                         )
                     }
                 }
@@ -334,13 +335,13 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                             Icon(
                                 imageVector = Icons.Default.EmojiEvents,
                                 contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary
+                                tint = MaterialTheme.colorScheme.tertiary
                             )
                             Text(
                                 text = "Победитель гонки",
                                 style = MaterialTheme.typography.titleLarge,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.primary
+                                color = MaterialTheme.colorScheme.tertiary
                             )
                         }
 
