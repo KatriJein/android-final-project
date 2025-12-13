@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,15 +18,18 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.EmojiEvents
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Flag
 import androidx.compose.material.icons.filled.MilitaryTech
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,37 +54,50 @@ import com.example.f1application.shared.ui.Dimens
 import com.example.f1application.shared.ui.FullscreenError
 import com.example.f1application.shared.ui.FullscreenLoading
 import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter
 
 @Composable
 fun DriverDetailScreen(driverId: String) {
-    val viewModel: DriverDetailViewModel = koinViewModel()
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    LaunchedEffect(driverId) {
-        viewModel.loadDriverDetails(driverId)
+    val viewModel: DriverDetailViewModel = koinViewModel {
+        parametersOf(driverId)
     }
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val isFavorite by viewModel.isFavorite.collectAsStateWithLifecycle()
 
-    when (val state = uiState) {
-        is DriverDetailUiState.Loading -> {
-            FullscreenLoading()
-        }
-
-        is DriverDetailUiState.Error -> {
-            FullscreenError(
-                retry = { viewModel.retry(driverId) },
+    Scaffold(
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { viewModel.toggleFavorite() },
+                containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                contentColor = if (isFavorite) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant
+            ) {
+                Icon(
+                    imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Outlined.FavoriteBorder,
+                    contentDescription = if (isFavorite) "Удалить из избранного" else "Добавить в избранное"
+                )
+            }
+        },
+        contentWindowInsets = WindowInsets(0)
+    ) { padding ->
+        when (val state = uiState) {
+            is DriverDetailUiState.Loading -> FullscreenLoading()
+            is DriverDetailUiState.Error -> FullscreenError(
+                retry = { viewModel.retry() },
                 text = state.message
             )
-        }
 
-        is DriverDetailUiState.Success -> {
-            DriverDetailsWithResultsContent(
-                standing = state.driverStanding,
-                results = state.results,
-                modifier = Modifier.fillMaxSize()
-            )
+            is DriverDetailUiState.Success -> {
+                DriverDetailsWithResultsContent(
+                    standing = state.driverStanding,
+                    results = state.results,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(padding)
+                )
+            }
         }
     }
 }

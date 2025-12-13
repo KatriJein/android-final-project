@@ -11,9 +11,12 @@ interface FavoriteDriverDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(driver: FavoriteDriverEntity)
 
-    @Delete
-    suspend fun delete(driver: FavoriteDriverEntity)
+    @Query("DELETE FROM favorite_drivers WHERE driverId = :driverId")
+    suspend fun deleteById(driverId: String)
 
     @Query("SELECT * FROM favorite_drivers")
     suspend fun getAllFavorites(): List<FavoriteDriverEntity>
+
+    @Query("SELECT EXISTS(SELECT 1 FROM favorite_drivers WHERE driverId = :driverId)")
+    suspend fun isFavorite(driverId: String): Boolean
 }
