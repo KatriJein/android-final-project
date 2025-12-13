@@ -6,6 +6,7 @@ import com.example.f1application.di.mainModule
 import com.example.f1application.di.networkModule
 import com.example.f1application.features.drivers.di.driversFeatureModule
 import com.example.f1application.features.home.di.homeFeatureModule
+import com.example.f1application.features.profile.di.profileFeatureModule
 import com.example.f1application.features.races.di.racesFeatureModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -23,7 +24,8 @@ class App : Application() {
                 dbModule,
                 homeFeatureModule,
                 racesFeatureModule,
-                driversFeatureModule
+                driversFeatureModule,
+                profileFeatureModule
             )
         }
     }

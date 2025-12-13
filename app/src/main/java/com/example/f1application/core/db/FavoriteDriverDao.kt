@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoriteDriverDao {
@@ -15,7 +16,7 @@ interface FavoriteDriverDao {
     suspend fun deleteById(driverId: String)
 
     @Query("SELECT * FROM favorite_drivers")
-    suspend fun getAllFavorites(): List<FavoriteDriverEntity>
+    fun getAllFavorites(): Flow<List<FavoriteDriverEntity>>
 
     @Query("SELECT EXISTS(SELECT 1 FROM favorite_drivers WHERE driverId = :driverId)")
     suspend fun isFavorite(driverId: String): Boolean

@@ -28,6 +28,7 @@ import com.example.f1application.core.navigation.TopLevelBackStack
 import com.example.f1application.features.drivers.view.DriverDetailScreen
 import com.example.f1application.features.drivers.view.DriversListScreen
 import com.example.f1application.features.home.view.HomeScreen
+import com.example.f1application.features.profile.view.ProfileScreen
 import com.example.f1application.features.races.view.RacesListScreen
 import com.example.f1application.shared.ui.RaceDetailScreen
 import org.koin.java.KoinJavaComponent.inject
@@ -79,7 +80,7 @@ fun MainScreen() {
                     DriversListScreen()
                 }
                 entry<Profile> {
-//                    ProfileView()
+                    ProfileScreen()
                 }
 
                 entry<RaceDetails> { route ->
