@@ -19,6 +19,7 @@ import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.example.f1application.core.navigation.DriverDetails
 import com.example.f1application.core.navigation.Drivers
+import com.example.f1application.core.navigation.EditProfile
 import com.example.f1application.core.navigation.Home
 import com.example.f1application.core.navigation.Profile
 import com.example.f1application.core.navigation.RaceDetails
@@ -28,6 +29,7 @@ import com.example.f1application.core.navigation.TopLevelBackStack
 import com.example.f1application.features.drivers.view.DriverDetailScreen
 import com.example.f1application.features.drivers.view.DriversListScreen
 import com.example.f1application.features.home.view.HomeScreen
+import com.example.f1application.features.profile.view.EditProfileScreen
 import com.example.f1application.features.profile.view.ProfileScreen
 import com.example.f1application.features.races.view.RacesListScreen
 import com.example.f1application.shared.ui.RaceDetailScreen
@@ -82,18 +84,15 @@ fun MainScreen() {
                 entry<Profile> {
                     ProfileScreen()
                 }
-
                 entry<RaceDetails> { route ->
                     RaceDetailScreen(race = route.race)
                 }
                 entry<DriverDetails> { route ->
                     DriverDetailScreen(driverId = route.driverId)
                 }
-//                entry<EditProfile> {
-//                    EditProfileScreen(
-//                        onBackClick = { topLevelBackStack.removeLast() }
-//                    )
-//                }
+                entry<EditProfile> {
+                    EditProfileScreen()
+                }
             })
     }
 }

@@ -11,7 +11,6 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val dbModule = module {
-//    single { UserDataStore(androidContext()) }
     single {
         Room.databaseBuilder(androidContext(), AppDatabase::class.java, "f1_db")
             .build()

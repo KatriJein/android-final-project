@@ -136,17 +136,17 @@ fun DriverDetailsWithResultsContent(
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier
-                        .padding(horizontal = Dimens.Large)
-                        .padding(top = 8.dp, bottom = 8.dp)
+                        .padding(horizontal = Dimens.size16)
+                        .padding(top = Dimens.size8, bottom = Dimens.size8)
                 )
             }
 
             items(results, key = { it.race.id }) { result ->
                 Column(
                     modifier = Modifier
-                        .padding(horizontal = Dimens.Large)
-                        .padding(bottom = 16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                        .padding(horizontal = Dimens.size16)
+                        .padding(bottom = Dimens.size16),
+                    verticalArrangement = Arrangement.spacedBy(Dimens.size16)
                 ) {
                     RaceResultItem(
                         result = result,
@@ -185,13 +185,13 @@ fun DriverHeader(standing: DriverStanding) {
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
-                .clip(RoundedCornerShape(bottomStart = Dimens.Large, bottomEnd = Dimens.Large)),
+                .clip(RoundedCornerShape(bottomStart = Dimens.size16, bottomEnd = Dimens.size16)),
             contentScale = ContentScale.Crop
         )
 
         Column(
             modifier = Modifier.padding(Dimens.ScreenPadding),
-            verticalArrangement = Arrangement.spacedBy(Dimens.Medium)
+            verticalArrangement = Arrangement.spacedBy(Dimens.size8)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -249,12 +249,12 @@ fun PersonalInfo(standing: DriverStanding) {
     Surface(
         modifier = Modifier
             .fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(Dimens.size8),
         tonalElevation = 2.dp
     ) {
         Column(
             modifier = Modifier.padding(Dimens.ScreenPadding),
-            verticalArrangement = Arrangement.spacedBy(Dimens.Medium)
+            verticalArrangement = Arrangement.spacedBy(Dimens.size8)
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 standing.driver.country.let {
@@ -264,7 +264,7 @@ fun PersonalInfo(standing: DriverStanding) {
                     )
                 }
 
-                Spacer(modifier = Modifier.width(Dimens.Medium))
+                Spacer(modifier = Modifier.width(Dimens.size8))
 
                 val flagUrl = CountryCodes.getFlagUrl(standing.driver.country)
                 GlideImage(
@@ -316,7 +316,7 @@ fun TeamInfo(standing: DriverStanding) {
     ) {
         Column(
             modifier = Modifier.padding(Dimens.ScreenPadding),
-            verticalArrangement = Arrangement.spacedBy(Dimens.Medium)
+            verticalArrangement = Arrangement.spacedBy(Dimens.size8)
         ) {
             standing.team.name.let {
                 Text(
@@ -330,7 +330,7 @@ fun TeamInfo(standing: DriverStanding) {
                 contentDescription = standing.team.name,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(100.dp),
+                    .height(Dimens.size100),
                 contentScale = ContentScale.Fit
             )
 
@@ -342,7 +342,7 @@ fun TeamInfo(standing: DriverStanding) {
                     )
                 }
 
-                Spacer(modifier = Modifier.width(Dimens.Medium))
+                Spacer(modifier = Modifier.width(Dimens.size8))
 
                 val flagUrl = CountryCodes.getFlagUrl(standing.team.country)
                 GlideImage(
@@ -361,7 +361,7 @@ fun TeamInfo(standing: DriverStanding) {
 fun StatItem(icon: ImageVector, label: String, value: Int?) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(Dimens.Small)
+        verticalArrangement = Arrangement.spacedBy(Dimens.size4)
     ) {
         Icon(
             icon,
@@ -398,22 +398,22 @@ fun RaceResultItem(
         modifier = Modifier
             .fillMaxWidth()
             .shadow(
-                elevation = if (isSprint) 2.dp else 4.dp,
-                shape = RoundedCornerShape(12.dp),
+                elevation = if (isSprint) 2.dp else Dimens.size4,
+                shape = RoundedCornerShape(Dimens.size12),
                 clip = true
             ),
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(Dimens.size16),
         color = Color.White,
         tonalElevation = 2.dp
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(Dimens.size16),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Surface(
-                shape = RoundedCornerShape(8.dp),
+                shape = RoundedCornerShape(Dimens.size8),
                 color = when (finishingPosition) {
                     1 -> Color(0xFFFFD700).copy(alpha = if (isSprint) 0.08f else 0.1f)
                     2 -> Color(0xFFC0C0C0).copy(alpha = if (isSprint) 0.08f else 0.1f)
@@ -444,19 +444,22 @@ fun RaceResultItem(
                         3 -> Color(0xFFCD7F32)
                         else -> accentColor
                     },
-                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                    modifier = Modifier.padding(
+                        horizontal = Dimens.size12,
+                        vertical = Dimens.size8
+                    ),
                     textAlign = TextAlign.Center
                 )
             }
 
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(Dimens.size12))
 
             Column(
                 modifier = Modifier.weight(1f)
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.size8)
                 ) {
                     Text(
                         text = result.race.name,
@@ -468,7 +471,7 @@ fun RaceResultItem(
 
                 if (isSprint) {
                     Surface(
-                        shape = RoundedCornerShape(4.dp),
+                        shape = RoundedCornerShape(Dimens.size4),
                         color = accentColor.copy(alpha = 0.1f),
                         border = BorderStroke(1.dp, accentColor.copy(alpha = 0.3f))
                     ) {
@@ -482,21 +485,21 @@ fun RaceResultItem(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(Dimens.size4))
 
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.size12)
                 ) {
 
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.size4)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Flag,
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.size(16.dp)
+                            modifier = Modifier.size(Dimens.size16)
                         )
                         Text(
                             text = "Старт: ${result.result.gridPosition}",
@@ -508,13 +511,13 @@ fun RaceResultItem(
                     if (result.result.pointsObtained > 0) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                            horizontalArrangement = Arrangement.spacedBy(Dimens.size4)
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Star,
                                 contentDescription = null,
                                 tint = accentColor,
-                                modifier = Modifier.size(16.dp)
+                                modifier = Modifier.size(Dimens.size16)
                             )
                             Text(
                                 text = "${result.result.pointsObtained} pts",

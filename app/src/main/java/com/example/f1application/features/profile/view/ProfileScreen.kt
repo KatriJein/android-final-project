@@ -105,7 +105,7 @@ private fun ProfileContent(
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(Dimens.size8)
     ) {
         item {
             ProfileHeader(
@@ -113,8 +113,8 @@ private fun ProfileContent(
                 onEditClick = onEditClick,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = Dimens.Large)
-                    .padding(bottom = 8.dp)
+                    .padding(horizontal = Dimens.size16)
+                    .padding(bottom = Dimens.size8)
                     .shadow(
                         elevation = 4.dp,
                         shape = RoundedCornerShape(24.dp),
@@ -132,7 +132,7 @@ private fun ProfileContent(
         if (state.favouritesDrivers.isEmpty()) {
             item {
                 EmptyFavoritesSection(
-                    modifier = Modifier.padding(horizontal = Dimens.Large),
+                    modifier = Modifier.padding(horizontal = Dimens.size16),
                     onSearchDrivers = onSearchDrivers
                 )
             }
@@ -144,7 +144,7 @@ private fun ProfileContent(
                 FavoriteDriverCard(
                     driver = driver,
                     onClick = { onDriverClick(driver.driverId) },
-                    modifier = Modifier.padding(horizontal = Dimens.Large)
+                    modifier = Modifier.padding(horizontal = Dimens.size16)
                 )
             }
         }
@@ -252,7 +252,7 @@ private fun FavoriteDriverCard(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(Dimens.Small)
+            .padding(Dimens.size4)
             .clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -260,20 +260,20 @@ private fun FavoriteDriverCard(
             model = driver.imageUrl,
             contentDescription = "${driver.firstName} ${driver.lastName}",
             modifier = Modifier
-                .size(86.dp)
-                .clip(RoundedCornerShape(Dimens.Large)),
+                .size(Dimens.size86)
+                .clip(RoundedCornerShape(Dimens.size16)),
             contentScale = ContentScale.Crop
         )
 
-        Spacer(modifier = Modifier.width(12.dp))
+        Spacer(modifier = Modifier.width(Dimens.size12))
 
         Column(
-            modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(Dimens.Small)
+            modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(Dimens.size4)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(
-                    Dimens.Medium
+                    Dimens.size8
                 )
             ) {
                 Text(
@@ -298,7 +298,7 @@ private fun EmptyFavoritesSection(
 ) {
     Surface(
         modifier = modifier,
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(Dimens.size16),
         color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.1f),
         border = androidx.compose.foundation.BorderStroke(
             1.dp,
@@ -317,7 +317,7 @@ private fun EmptyFavoritesSection(
                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.size(48.dp)
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Dimens.size16))
             Text(
                 text = "Пока нет избранных пилотов",
                 style = MaterialTheme.typography.titleMedium,
@@ -330,11 +330,11 @@ private fun EmptyFavoritesSection(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primary
                 ),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(Dimens.size12)
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.size8)
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,

@@ -14,10 +14,6 @@ import java.util.concurrent.TimeUnit
 
 val networkModule = module {
     single {
-//        OkHttpClient.Builder()
-//            .addInterceptor(ChuckerInterceptor(get()))
-//            .build()
-
         OkHttpClient.Builder()
             .addInterceptor(ChuckerInterceptor(get()))
             .connectTimeout(10, TimeUnit.SECONDS)

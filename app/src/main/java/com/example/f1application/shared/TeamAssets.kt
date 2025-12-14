@@ -41,15 +41,15 @@ object TeamAssets {
         "hulkenberg" to "https://img.championat.com/s/1350x900/news/big/y/b/hyulkenberg-nazval-vozmozhnuyu-prichinu-vyzvavshuyu-ego-diskvalifikaciyu-v-bahrejne_1744958503735086107.jpg",
         "stroll" to "https://cdn.images.express.co.uk/img/dynamic/73/1200x712/4598805.jpg",
         "sainz" to "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1zCe0k.img?w=1200&h=630&m=4&q=81",
-        "lawson" to "https://cdn-3.motorsport.com/images/amp/0qXDwqy6/s6/liam-lawson-carlin-1.jpg",
+        "lawson" to "https://avatars.mds.yandex.net/i?id=5d603e5866fb3f68ad7dc544278a770d_l-4284141-images-thumbs&n=13",
         "alonso" to "https://cdnn21.img.ria.ru/images/07e7/03/0d/1857571233_0:0:2048:1152_1920x1080_80_0_0_6d59fac2e1a0cfc6ad7466d515fa727f.jpg",
         "ocon" to "https://img.championat.com/s/1350x900/news/big/m/s/esteban-okon-propustit-pervuyu-trenirovku-gran-pri-ispanii_1748450032976884147.jpg",
-        "gasly" to "https://cdn-5.motorsport.com/images/amp/27vmJBm0/s6/pierre-gasly-alpine-1.jpg",
+        "gasly" to "https://s.yimg.com/ny/api/res/1.2/CPaVCEtxjpaViJE722iqTA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTY0MDtjZj13ZWJw/https://media.zenfs.com/en/motorsport_articles_445/f73e3125ab9dfcc9b7d37ad796c66657",
         "tsunoda" to "https://avatars.mds.yandex.net/i?id=eeb5ba03f9dbeccb6478d49a61a002ce_l-12635432-images-thumbs&n=13",
         "bortoleto" to "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yVECA.img?w=1200&h=675&m=4&q=79",
         "bearman" to "https://media.zenfs.com/en/motorsport_articles_445/2ad0d0b43056a4081b68cb00c42e82ec",
         "colapinto" to "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1EHbu3.img?w=1200&h=675&m=4&q=89",
-        "doohan" to "https://www.topgear.com/sites/default/files/2025/05/BWT%20Alpine%20F1%20Team%20Reserve%20Driver%20Jack%20Doohan%20to%20drive%20A523%20in%20Mexico%20City%20and%20Abu%20Dhabi%20FP1%20sessions.jpg",
+        "doohan" to "https://avatars.mds.yandex.net/i?id=c37822494fc05a5e6d52e770ee606885_l-4780598-images-thumbs&n=13",
         "default" to "https://www.manageengine.com/images/speaker-placeholder.png"
     )
 

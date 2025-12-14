@@ -23,7 +23,7 @@ fun FullscreenError(
     Box(
         Modifier
             .fillMaxSize()
-            .padding(Dimens.Medium),
+            .padding(Dimens.size8),
         contentAlignment = Alignment.Center
     ) {
         ErrorItem(
@@ -43,7 +43,7 @@ fun ErrorItem(
         modifier = modifier
             .fillMaxWidth()
             .clickable { onClick() }
-            .padding(Dimens.Small),
+            .padding(Dimens.size4),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(

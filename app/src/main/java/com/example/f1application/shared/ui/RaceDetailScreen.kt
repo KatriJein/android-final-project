@@ -69,7 +69,7 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(20.dp),
-        contentPadding = PaddingValues(vertical = 16.dp)
+        contentPadding = PaddingValues(vertical = Dimens.size16)
     ) {
         item {
             Box(
@@ -122,7 +122,7 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                     color = Color.White,
                     modifier = Modifier
                         .align(Alignment.BottomStart)
-                        .padding(16.dp)
+                        .padding(Dimens.size16)
                         .fillMaxWidth(),
                     maxLines = 2,
                     overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
@@ -134,10 +134,10 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
             Surface(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
+                    .padding(horizontal = Dimens.size16)
                     .shadow(
-                        elevation = 8.dp, shape = RoundedCornerShape(16.dp), clip = true
-                    ), shape = RoundedCornerShape(16.dp), color = Color.White, tonalElevation = 2.dp
+                        elevation = Dimens.size8, shape = RoundedCornerShape(Dimens.size16), clip = true
+                    ), shape = RoundedCornerShape(Dimens.size16), color = Color.White, tonalElevation = 2.dp
             ) {
                 Column(
                     modifier = Modifier.padding(20.dp)
@@ -145,7 +145,7 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.size8)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Info,
@@ -161,7 +161,7 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Dimens.size16))
 
                     InfoGridItem(
                         icon = Icons.Default.Numbers, title = "Этап", value = race.round.toString()
@@ -174,7 +174,7 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 8.dp),
+                            .padding(vertical = Dimens.size8),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
@@ -188,7 +188,7 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                             modifier = Modifier.size(20.dp)
                         )
 
-                        Spacer(modifier = Modifier.width(12.dp))
+                        Spacer(modifier = Modifier.width(Dimens.size12))
 
                         Column {
                             Text(
@@ -221,18 +221,18 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
             Surface(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
+                    .padding(horizontal = Dimens.size16)
                     .shadow(
-                        elevation = 8.dp, shape = RoundedCornerShape(16.dp), clip = true
-                    ), shape = RoundedCornerShape(16.dp), color = Color.White, tonalElevation = 2.dp
+                        elevation = Dimens.size8, shape = RoundedCornerShape(Dimens.size16), clip = true
+                    ), shape = RoundedCornerShape(Dimens.size16), color = Color.White, tonalElevation = 2.dp
             ) {
                 Column(
-                    modifier = Modifier.padding(16.dp)
+                    modifier = Modifier.padding(Dimens.size16)
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.size8)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Place,
@@ -247,7 +247,7 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Dimens.size16))
 
                     Text(
                         text = race.circuit.name,
@@ -255,17 +255,17 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                         fontWeight = FontWeight.SemiBold
                     )
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(Dimens.size8))
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.size8)
                     ) {
                         val flagUrl = CountryCodes.getFlagUrl(race.circuit.country)
                         if (flagUrl != null) {
                             Surface(
-                                shape = RoundedCornerShape(8.dp),
+                                shape = RoundedCornerShape(Dimens.size8),
                                 color = Color.Transparent,
                                 modifier = Modifier.size(32.dp)
                             ) {
@@ -274,7 +274,7 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                                     contentDescription = "Флаг ${race.circuit.country}",
                                     modifier = Modifier
                                         .size(32.dp)
-                                        .clip(RoundedCornerShape(8.dp)),
+                                        .clip(RoundedCornerShape(Dimens.size8)),
                                     contentScale = ContentScale.Crop
                                 )
                             }
@@ -289,11 +289,11 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Dimens.size16))
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.size8)
                     ) {
                         InfoBadge(
                             icon = Icons.Default.Timeline,
@@ -316,21 +316,21 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                 Surface(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
+                        .padding(horizontal = Dimens.size16)
                         .shadow(
-                            elevation = 8.dp, shape = RoundedCornerShape(16.dp), clip = true
+                            elevation = Dimens.size8, shape = RoundedCornerShape(Dimens.size16), clip = true
                         ),
-                    shape = RoundedCornerShape(16.dp),
+                    shape = RoundedCornerShape(Dimens.size16),
                     color = Color.White,
                     tonalElevation = 2.dp
                 ) {
                     Column(
-                        modifier = Modifier.padding(16.dp)
+                        modifier = Modifier.padding(Dimens.size16)
                     ) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            horizontalArrangement = Arrangement.spacedBy(Dimens.size8)
                         ) {
                             Icon(
                                 imageVector = Icons.Default.EmojiEvents,
@@ -363,8 +363,8 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                                     model = race.winner.imageUrl,
                                     contentDescription = "Фото ${race.winner.firstName} ${race.winner.lastName}",
                                     modifier = Modifier
-                                        .size(100.dp)
-                                        .clip(RoundedCornerShape(Dimens.Large)),
+                                        .size(Dimens.size100)
+                                        .clip(RoundedCornerShape(Dimens.size16)),
                                     contentScale = ContentScale.Crop
                                 )
 
@@ -372,7 +372,7 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                                 Surface(
                                     shape = CircleShape,
                                     color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
-                                    modifier = Modifier.size(100.dp)
+                                    modifier = Modifier.size(Dimens.size100)
                                 ) {
                                     Box(
                                         contentAlignment = Alignment.Center
@@ -387,14 +387,14 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                                 }
                             }
 
-                            Spacer(modifier = Modifier.width(16.dp))
+                            Spacer(modifier = Modifier.width(Dimens.size16))
 
                             Column(
                                 modifier = Modifier.weight(1f)
                             ) {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                                    horizontalArrangement = Arrangement.spacedBy(Dimens.size4)
                                 ) {
                                     Text(
                                         text = "${race.winner.firstName} ${race.winner.lastName}",
@@ -409,7 +409,7 @@ fun RaceDetailContent(race: Race, topLevelBackStack: TopLevelBackStack<Route>) {
                                         fontWeight = FontWeight.Bold,
                                         color = race.teamWinner?.color ?: Color.Black,
                                         modifier = Modifier.padding(
-                                            horizontal = 12.dp
+                                            horizontal = Dimens.size12
                                         )
                                     )
                                 }
@@ -435,7 +435,7 @@ private fun TeamInfoSection(team: Team) {
         Surface(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 16.dp),
+                .padding(vertical = Dimens.size16),
             color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
             shape = RoundedCornerShape(2.dp)
         ) {
@@ -445,7 +445,7 @@ private fun TeamInfoSection(team: Team) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(Dimens.size16)
         ) {
             Column(
                 modifier = Modifier.weight(1f)
@@ -457,7 +457,7 @@ private fun TeamInfoSection(team: Team) {
                     fontWeight = FontWeight.Medium
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(Dimens.size4))
 
                 Text(
                     text = team.name,
@@ -469,7 +469,7 @@ private fun TeamInfoSection(team: Team) {
             if (!team.imageUrl.isNullOrBlank()) {
 
                 Surface(
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RoundedCornerShape(Dimens.size12),
                     color = Color.Transparent,
                     modifier = Modifier
                         .height(60.dp)
@@ -480,13 +480,13 @@ private fun TeamInfoSection(team: Team) {
                         contentDescription = "Логотип ${team.name}",
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(12.dp),
+                            .padding(Dimens.size12),
                         contentScale = ContentScale.Fit
                     )
                 }
             } else {
                 Surface(
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RoundedCornerShape(Dimens.size12),
                     color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
                     modifier = Modifier
                         .height(60.dp)
@@ -518,7 +518,7 @@ private fun InfoGridItem(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(vertical = Dimens.size8),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -528,7 +528,7 @@ private fun InfoGridItem(
             modifier = Modifier.size(20.dp)
         )
 
-        Spacer(modifier = Modifier.width(12.dp))
+        Spacer(modifier = Modifier.width(Dimens.size12))
 
         Column {
             Text(
@@ -554,20 +554,20 @@ private fun InfoBadge(
 ) {
     Surface(
         modifier = modifier,
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(Dimens.size8),
         color = color.copy(alpha = 0.1f),
         border = BorderStroke(1.dp, color.copy(alpha = 0.3f))
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
+            horizontalArrangement = Arrangement.spacedBy(Dimens.size4)
         ) {
             Icon(
                 imageVector = icon,
                 contentDescription = null,
                 tint = color,
-                modifier = Modifier.size(16.dp)
+                modifier = Modifier.size(Dimens.size16)
             )
             Text(
                 text = text,

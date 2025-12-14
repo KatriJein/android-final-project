@@ -48,6 +48,7 @@ import com.example.f1application.core.model.Race
 import com.example.f1application.features.races.viewModel.RacesListUiState
 import com.example.f1application.features.races.viewModel.RacesListViewModel
 import com.example.f1application.shared.ui.CustomHeader
+import com.example.f1application.shared.ui.Dimens
 import com.example.f1application.shared.ui.FullscreenError
 import com.example.f1application.shared.ui.FullscreenLoading
 import org.koin.androidx.compose.koinViewModel
@@ -89,7 +90,7 @@ fun RacesListScreen() {
                     state = lazyListState,
                     modifier = Modifier
                         .fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.size16)
                 ) {
                     items(state.races) { race ->
                         RaceItem(race = race) {
@@ -108,11 +109,11 @@ fun RaceItem(race: Race, onClick: () -> Unit) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = Dimens.size16)
             .clickable { onClick() }
             .shadow(
-                elevation = 8.dp, shape = RoundedCornerShape(16.dp), clip = true
-            ), shape = RoundedCornerShape(16.dp), color = Color.White, tonalElevation = 2.dp) {
+                elevation = Dimens.size8, shape = RoundedCornerShape(Dimens.size16), clip = true
+            ), shape = RoundedCornerShape(Dimens.size16), color = Color.White, tonalElevation = 2.dp) {
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -120,15 +121,15 @@ fun RaceItem(race: Race, onClick: () -> Unit) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp)
+                        .height(Dimens.size200)
                 ) {
                     GlideImage(
                         model = race.circuit.imageUrl,
                         contentDescription = "Трасса ${race.circuit.name}",
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(200.dp)
-                            .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)),
+                            .height(Dimens.size200)
+                            .clip(RoundedCornerShape(topStart = Dimens.size16, topEnd = Dimens.size16)),
                         contentScale = ContentScale.Crop
                     )
 
@@ -152,7 +153,7 @@ fun RaceItem(race: Race, onClick: () -> Unit) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(Dimens.size16)
             ) {
                 Text(
                     text = race.name,
@@ -163,11 +164,11 @@ fun RaceItem(race: Race, onClick: () -> Unit) {
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(Dimens.size12))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.size8)
                 ) {
                     Icon(
                         imageVector = Icons.Default.Place,
@@ -184,12 +185,12 @@ fun RaceItem(race: Race, onClick: () -> Unit) {
                     )
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(Dimens.size12))
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.size8)
                 ) {
                     Icon(
                         imageVector = Icons.Default.DateRange,
@@ -205,7 +206,7 @@ fun RaceItem(race: Race, onClick: () -> Unit) {
                     )
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(Dimens.size12))
 
                 RaceInfoBadges(race)
             }
@@ -217,7 +218,7 @@ fun RaceItem(race: Race, onClick: () -> Unit) {
 fun RaceInfoBadges(race: Race) {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(Dimens.size8)
     ) {
         InfoBadge(
             icon = Icons.Default.Directions,
@@ -248,20 +249,20 @@ fun InfoBadge(
 ) {
     Surface(
         modifier = modifier,
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(Dimens.size8),
         color = color.copy(alpha = 0.1f),
         border = BorderStroke(1.dp, color.copy(alpha = 0.3f))
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
+            horizontalArrangement = Arrangement.spacedBy(Dimens.size4)
         ) {
             Icon(
                 imageVector = icon,
                 contentDescription = null,
                 tint = color,
-                modifier = Modifier.size(16.dp)
+                modifier = Modifier.size(Dimens.size16)
             )
             Text(
                 text = text,

@@ -71,8 +71,8 @@ fun HomeScreen() {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    contentPadding = PaddingValues(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.size16),
+                    contentPadding = PaddingValues(Dimens.size16)
                 ) {
                     item {
                         Text(
@@ -80,7 +80,7 @@ fun HomeScreen() {
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onSurface,
-                            modifier = Modifier.padding(bottom = 8.dp)
+                            modifier = Modifier.padding(bottom = Dimens.size8)
                         )
                     }
 
@@ -96,7 +96,7 @@ fun HomeScreen() {
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onSurface,
-                            modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)
+                            modifier = Modifier.padding(top = Dimens.size16, bottom = Dimens.size8)
                         )
                     }
 
@@ -115,7 +115,7 @@ fun DriverStandingItemFull(standing: DriverStanding, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(Dimens.Small)
+            .padding(Dimens.size4)
             .clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -123,20 +123,20 @@ fun DriverStandingItemFull(standing: DriverStanding, onClick: () -> Unit) {
             model = standing.driver.imageUrl,
             contentDescription = "${standing.driver.firstName} ${standing.driver.lastName}",
             modifier = Modifier
-                .size(100.dp)
-                .clip(RoundedCornerShape(Dimens.Large)),
+                .size(Dimens.size100)
+                .clip(RoundedCornerShape(Dimens.size16)),
             contentScale = ContentScale.Crop
         )
 
-        Spacer(modifier = Modifier.width(12.dp))
+        Spacer(modifier = Modifier.width(Dimens.size12))
 
         Column(
-            modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(Dimens.Small)
+            modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(Dimens.size4)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(
-                    Dimens.Medium
+                    Dimens.size8
                 )
             ) {
                 Text(
@@ -159,7 +159,7 @@ fun DriverStandingItemFull(standing: DriverStanding, onClick: () -> Unit) {
         Text(
             text = standing.points.toString(),
             style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.SemiBold),
-            modifier = Modifier.padding(end = 8.dp)
+            modifier = Modifier.padding(end = Dimens.size8)
         )
     }
 }
@@ -170,13 +170,13 @@ fun TeamListItemFull(standing: ConstructorStanding) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(Dimens.Small)
+            .padding(Dimens.size4)
             .shadow(
-                elevation = 4.dp,
-                shape = RoundedCornerShape(12.dp),
+                elevation = Dimens.size4,
+                shape = RoundedCornerShape(Dimens.size12),
                 clip = true
             ),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(Dimens.size12),
         color = Color.White,
         tonalElevation = 1.dp
     ) {
@@ -195,7 +195,7 @@ fun TeamListItemFull(standing: ConstructorStanding) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(120.dp)
-                            .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)),
+                            .clip(RoundedCornerShape(topStart = Dimens.size12, topEnd = Dimens.size12)),
                         contentScale = ContentScale.Fit
                     )
                 }
@@ -203,7 +203,7 @@ fun TeamListItemFull(standing: ConstructorStanding) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(Dimens.size16),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column(

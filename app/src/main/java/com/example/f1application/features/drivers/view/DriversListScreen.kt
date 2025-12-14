@@ -25,7 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
@@ -77,8 +76,8 @@ fun DriversListScreen() {
                     state = lazyListState,
                     modifier = Modifier
                         .fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(Dimens.Small),
-                    contentPadding = PaddingValues(8.dp)
+                    verticalArrangement = Arrangement.spacedBy(Dimens.size4),
+                    contentPadding = PaddingValues(Dimens.size8)
                 ) {
                     items(state.standings) { standing ->
                         DriverStandingItemFull(standing = standing) {
@@ -97,7 +96,7 @@ fun DriverStandingItemFull(standing: DriverStanding, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(Dimens.Small)
+            .padding(Dimens.size4)
             .clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -105,20 +104,20 @@ fun DriverStandingItemFull(standing: DriverStanding, onClick: () -> Unit) {
             model = standing.driver.imageUrl,
             contentDescription = "${standing.driver.firstName} ${standing.driver.lastName}",
             modifier = Modifier
-                .size(100.dp)
-                .clip(RoundedCornerShape(Dimens.Large)),
+                .size(Dimens.size100)
+                .clip(RoundedCornerShape(Dimens.size16)),
             contentScale = ContentScale.Crop
         )
 
-        Spacer(modifier = Modifier.width(12.dp))
+        Spacer(modifier = Modifier.width(Dimens.size12))
 
         Column(
-            modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(Dimens.Small)
+            modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(Dimens.size4)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(
-                    Dimens.Medium
+                    Dimens.size8
                 )
             ) {
                 Text(
@@ -141,7 +140,7 @@ fun DriverStandingItemFull(standing: DriverStanding, onClick: () -> Unit) {
         Text(
             text = standing.points.toString(),
             style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.SemiBold),
-            modifier = Modifier.padding(end = 8.dp)
+            modifier = Modifier.padding(end = Dimens.size8)
         )
     }
 }
